@@ -1,9 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: "Resources used by Nirmata"
 Parameters:
-  ClusterName:
-    Type: String
-    Description: "EKS cluster name"
   Region:
     Type: String
     Description: "Region Name"
@@ -11,7 +8,7 @@ Resources:
   NirmataRolePolicy:
     Type: AWS::IAM::ManagedPolicy
     Properties:
-      ManagedPolicyName: !Sub "NirmataRolePolicy-${ClusterName}"
+      ManagedPolicyName: "NirmataRolePolicy"
       PolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -66,7 +63,7 @@ Resources:
       ManagedPolicyArns: 
           - !Ref NirmataRolePolicy
       Description: "Assume role Created By Nirmata"
-      RoleName: !Sub "NirmataAssumeRole-${ClusterName}"
+      RoleName: "NirmataAssumeRole"
 Outputs:
   Role:
     Value: !GetAtt NirmataAssumeRole.Arn
